@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title> resume</title>
+    <meta name="keyword" content=" resume 个人简历">
+    <meta name="description" content=" resume 个人简历">
+    <link  type="icon/x-icon" rel="icon" href="img/icon.png">
+    <link rel="stylesheet" href="css/reset.min.css">
+    <link rel="stylesheet" href="css/swiper.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script>
+        document.documentElement.style.fontSize = document.documentElement.clientWidth/640*100+"px";
+    </script>
+</head>
+<body>
+<section class="start">
+    <div class="music">
+        <audio src="img/beyond.mp3" preload="none" id="beyond"></audio>
+    </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide slide1">
+                    <p>
+                        <img src="img/slide1-1.png">
+                        <img src="img/slide1-2.png">
+                        <img src="img/slide1-3.png">
+                        <img src="img/slide1-4.png">
+                    </p>
+                <img src="img/job.png" class="job">
+                <span></span>
+            </div>
+            <div class="swiper-slide slide2">
+                    <div class="photo"></div>
+                    <div class=" information">
+                        <h4 class="aaa"><span class="text1">基本信息</span><span>basic information</span></h4>
+                    <ul class="wrapper">
+                    <li class="clear main">
+                        <ul class="left">
+                            <li>姓名 ：吕先磊</li>
+                            <li>出生 ：1993-08-01</li>
+                            <li>身高 ：172cm</li>
+                            <li>籍贯 : 中国山东</li>
+                        </ul>
+                        <ul class="right">
+                            <li>性别 ：男</li>
+                            <li>学历 ：本科</li>
+                            <li>体重 ： 64kg</li>
+                            <li>现居 :　北京昌平</li>
+                        </ul>
+                    </li>
+                </ul>
+                        <div class="bottom">
+                            <div class="iii"><img src="img/jibenxinxi.png"></div>
+                            <img src="img/liner.png">
+                            <img src="img/job.png">
+                            <span></span>
+                        </div>
+                    </div>
+            </div>
+            <div class="swiper-slide slide3">
+                <div class="photo"></div>
+                <div class="middle">
+                    <h4 class="aaa"><span class="text1">专业技能</span><span>Professional skills</span></h4>
+                    <div class="skill clear">
+                        <img src="img/1_01.png">
+                        <img src="img/1_02.png">
+                        <img src="img/1_03.png">
+                        <img src="img/1_04.png">
+                        <img src="img/1_05.png">
+                        <img src="img/1_07.png">
+                         <span class="span"></span>
+                        </div>
+                    </div>
+                </div>
+            <div class="swiper-slide slide4">
+                <div class="photo"></div>
+                <h4 class="aaa"><span class="text1">联系方式</span><span>Contact information</span></h4>
+                <ul>
+                    <li class="a"><img src="img/jpg_2.jpg"></li>
+                    <li class="b"><img src="img/jpg_2.jpg"></li>
+                    <li class="c"><img src="img/jpg_2.jpg"></li>
+                    <li class="d"><img src="img/jpg_6.jpg"></li>
+                    <li class="e"><img src="img/jpg_6.jpg"></li>
+                    <li class="f"><img src="img/jpg_6.jpg"></li>
+                </ul>
+            </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+<script src="js/swiper.min.js"></script>
+<script>
+    var mySwiper = new Swiper(".swiper-container",{
+        direction: 'vertical',
+        loop: true,
+        onTransitionEnd: function (swiper) {
+            var curIndex = swiper.activeIndex;
+            var slides = swiper.slides;
+            [].forEach.call(slides, function (item, index) {
+                item.id = "";
+                if (index == curIndex) {
+                    switch (index) {
+                        case 0:
+                            item.id = "page" + (slides.length - 2);
+                            break;
+                        case slides.length - 1:
+                            item.id = "page1";
+                            break;
+                        default:
+                            item.id = "page" + curIndex;
+                    }
+                }
+            })
+        }
+    });
+    var music = document.querySelector(".music");
+    var beyond = document.querySelector("#beyond");
+    window.setTimeout(function () {
+        beyond.play();
+        beyond.addEventListener("canplay", function () {
+            music.style.opacity = 1;
+            music.className = "music musicCur";
+        }, false);
+    }, 1000);
+    music.addEventListener("click", function () {
+        if (beyond.paused) {
+            beyond.play();
+            music.className = "music musicCur";
+        } else {
+            beyond.pause();
+            music.className = "music";
+        }
+    }, false);
+</script>
+</html>
