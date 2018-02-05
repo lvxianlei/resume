@@ -1,16 +1,10 @@
 var flag = false;
 function selectFileImage(fileObj) {
-	//loading.gif
-	// $(".upload_show li").eq(nowNum).find('img').attr('src','img/up.gif');
-
 	var file = fileObj.files['0'];
 	var file_len = fileObj.files.length;
-	// alert(fileObj.files.length);
 	for (var i = 0; i < file_len; i++) {
 		FileImageControl(fileObj.files[i]);
-		// console.log(fileObj.files[i]);
 	}
-	//图片方向角 added by lzk
 	var Orientation = null;
 
 }
@@ -18,34 +12,23 @@ var ImageFile = [];
 function FileImageControl(file){
 	if (file) {
 		console.log("正在上传,请稍后...");
-		var rFilter = /^(image\/jpeg|image\/png)$/i; // 检查图片格式
+		var rFilter = /^(image\/jpeg|image\/png)$/i;
 		if (!rFilter.test(file.type)) {
-			//showMyTips("请选择jpeg、png格式的图片", false);
 			return;
 		}
-		// var URL = URL || webkitURL;
-		//获取照片方向角属性，用户旋转控制
 		EXIF.getData(file, function() {
-		   // alert(EXIF.pretty(this));
 		    EXIF.getAllTags(this);
-		    //alert(EXIF.getTag(this, 'Orientation'));
 		    Orientation = EXIF.getTag(this, 'Orientation');
-		    //return;
 		});
 		
 		var oReader = new FileReader();
 		var expectWidth,expectHeight;
 		oReader.onload = function(e) {
-			//var blob = URL.createObjectURL(file);
-			//_compress(blob, file, basePath);
 			var image = new Image();
 			image.src = e.target.result;
-			// console.log(image.src);
 			image.onload = function() {
 				var expectWidth = this.naturalWidth;
 				var expectHeight = this.naturalHeight;
-				// alert(expectWidth+'###'+expectHeight)
-
 				if (this.naturalWidth > this.naturalHeight && this.naturalWidth > 750) {
 					expectWidth = 750;
 					expectHeight = expectWidth * this.naturalHeight / this.naturalWidth;
@@ -62,7 +45,7 @@ function FileImageControl(file){
 				var base64 = null;
 				base64 = canvas.toDataURL("image/jpeg", 0.6);
 				if (navigator.userAgent.match(/iphone/i)) {
-					if(Orientation != "" && Orientation != 1){
+					if(Orientation !== "" && Orientation !== 1){
 						switch(Orientation){
 						 	case 6:
 						 		rotateImg(this,'left',canvas,expectWidth,expectHeight);
@@ -81,7 +64,7 @@ function FileImageControl(file){
 				}else if (navigator.userAgent.match(/Android/i)) {
 					base64 = canvas.toDataURL("image/jpeg", 0.6);
 				}else{
-					if(Orientation != "" && Orientation != 1){
+					if(Orientation !== "" && Orientation !== 1){
 						switch(Orientation){
 						 	case 6:
 						 		rotateImg(this,'left',canvas,expectWidth,expectHeight);
