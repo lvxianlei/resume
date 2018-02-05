@@ -13,10 +13,12 @@
             margin: 0;
             padding: 0;
         }
-        button{
+
+        button {
             border: none;
             outline: none;
         }
+
         content {
             width: 100%;
             overflow: hidden;
@@ -36,38 +38,43 @@
             border: 0.03rem dashed #dadada;
             border-radius: 0.1rem;
         }
-        #image{
+
+        #image {
             display: block;
             width: 100%;
         }
-        #upload{
+
+        #upload {
             display: block;
             position: absolute;
-            top:0;
+            top: 0;
             left: 0;
             width: 100%;
             height: 3rem;
             z-index: 2;
             opacity: 0;
         }
-        .btn{
+
+        .btn {
             position: absolute;
             bottom: 1.42rem;
             width: 100%;
         }
-        .text{
+
+        .text {
             width: 100%;
             text-align: center;
             line-height: 1rem;
             font-size: 0.28rem;
             color: #dadada;
         }
-        .submit{
+
+        .submit {
             display: block;
             margin: 0 auto;
             width: 3rem;
             height: 0.7rem;
-            color:#fff;
+            color: #fff;
             font-size: 0.34rem;
             line-height: 0.7rem;
             border-radius: 0.1rem;
@@ -80,10 +87,12 @@
     <h1>美团</h1>
     <div class="uploadImage">
         <img id="image" src="./btn_upload.jpg" alt="">
-        <input id="upload" type="file" accept="image/*" onchange="selectFileImage(this)">
+        <input id="upload" type="file" accept="image/*">
     </div>
     <p class="text">点击此处添加图片</p>
-    <div class="btn"><button class="submit">确认</button></div>
+    <div class="btn">
+        <button class="submit">确认</button>
+    </div>
 </content>
 </body>
 <script type="text/javascript" src="./jquery-2.1.3.min.js"></script>
@@ -91,6 +100,11 @@
 <script type="text/javascript" src="./uploadImage.js"></script>
 <script>
     var init = (function () {
+        var upload = function () {
+            document.querySelector('#upload').onchange = function(){
+                selectFileImage(this);
+            }
+        };
         var uploadImage = function () {
             document.querySelector('.submit').onclick = function () {
                 var data = document.querySelector('#image').src;
@@ -100,10 +114,9 @@
                 } else {
                     $.ajax({
                         method: 'POST',
-                        url: 'http://t.50-jia.com/bim/private/faceMerge',
+                        url: 'https://t.50-jia.com/bim/private/faceMerge',
                         data: {"img64": data},
                         success: function (data) {
-                            console.log(data);
                             window.location.href = data.img_url;
                         }
                     })
@@ -111,6 +124,7 @@
             }
         };
         return (function () {
+            upload();
             uploadImage();
         })
     })();
